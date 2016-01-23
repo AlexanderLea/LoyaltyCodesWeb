@@ -1,12 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div ng-app="loyaltyCardApp">
-    <div ng-controller="CardListCtrl" class="row">
-        <ul>
-            <li ng-repeat="card in cardList">
-                <span>{{card.Name}}</span>
-            </li>
-        </ul>
-    </div>
+
+<div ng-app="LoyaltyCardApp" ng-controller="CardController" class="row">
+    <ul>
+        <li ng-repeat="card in cardList">
+            <span>{{card.Name}}</span>
+        </li>
+    </ul>
 </div>

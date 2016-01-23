@@ -1,6 +1,6 @@
-﻿var app = angular.module('loyaltyCardApp', []);
+﻿var app = angular.module('LoyaltyCardApp', []);
 
-app.factory('indexedDbFactory', function ($window, $q) {
+app.factory('$database', function () {
     const DB_NAME = 'LoyaltyCodesDb';
     const DB_VERSION = 2; // Use a long long for this value (don't use a float)
     const DB_STORE_NAME = 'Cards';
@@ -9,7 +9,6 @@ app.factory('indexedDbFactory', function ($window, $q) {
 
     function openDb() {
         var promise = new Promise(function (resolve, reject) {
-            console.log("openDb ...");
             var req = indexedDB.open(DB_NAME, DB_VERSION);
             req.onsuccess = function (evt) {
                 // Better use "this" than "req" to get the result to avoid problems with
@@ -54,14 +53,14 @@ app.factory('indexedDbFactory', function ($window, $q) {
 
         var store = getObjectStore(DB_STORE_NAME, 'readwrite');
 
-        var promise = new Promise(function(resolve, reject) {
+        var promise = new Promise(function (resolve, reject) {
             var req = store.add(card);
 
-            req.onsuccess = function(evt) {
+            req.onsuccess = function (evt) {
                 console.log("Insertion in DB successful");
                 resolve();
             };
-            req.onerror = function() {
+            req.onerror = function () {
                 console.error("Error Inserting into db", this.error);
                 reject("Error Inserting into db", this.error);
             };
@@ -73,17 +72,16 @@ app.factory('indexedDbFactory', function ($window, $q) {
     function getAllCards() {
         console.log("Get all cards");
         var store = getObjectStore(DB_STORE_NAME, 'readonly');
+        var cardList = [];
 
         var promise = new Promise(function (resolve, reject) {
             var req = store.openCursor();
 
             req.onsuccess = function (evt) {
-                var cardList = [];
                 var cursor = evt.target.result;
 
                 // If the cursor is pointing at something, ask for the data
                 if (cursor) {
-                    console.log("getAllCards cursor:", cursor);
                     req = store.get(cursor.key);
                     req.onsuccess = function (evt) {
                         var value = evt.target.result;
@@ -106,7 +104,7 @@ app.factory('indexedDbFactory', function ($window, $q) {
                 }
             };
 
-            req.onerror = function(e) {
+            req.onerror = function (e) {
                 console.error('openDb:', evt.target.errorCode);
                 reject('Error opening db:', evt.target.errorCode);
             }
@@ -117,7 +115,7 @@ app.factory('indexedDbFactory', function ($window, $q) {
     function getCard(id) {
         var store = getObjectStore(DB_STORE_NAME, 'readonly');
 
-        var promise = new Promise(function(resolve, reject) {
+        var promise = new Promise(function (resolve, reject) {
             var req = store.get(id);
 
             req.onsuccess = function (event) {
@@ -125,7 +123,7 @@ app.factory('indexedDbFactory', function ($window, $q) {
                 resolve(req.result);
             };
 
-            req.onerror = function(event) {
+            req.onerror = function (event) {
                 // Handle errors!
                 console.error("Error getting data for", id);
                 reject("Error getting data for", id);
@@ -141,4 +139,40 @@ app.factory('indexedDbFactory', function ($window, $q) {
         getCard: getCard,
         getAllCards: getAllCards,
     };
+});
+
+app.controller('CardController', function ($scope, $database) {
+    $scope.cardList = null;
+
+    var getCardList = function () {
+        $database.getAllCards().then(function (data) {
+            $scope.cardList = data;
+        }, function(err) {
+            $window.alert(err);
+            return null;
+        });
+    };
+
+    //var addCard = function () {
+    //    $database.addCard(vm.card).then(function () {
+    //        vm.refreshList();
+    //        vm.todoText = "";
+    //    }, function (err) {
+    //        $window.alert(err);
+    //    });
+    //};        
+
+    function init() {
+      
+        $database.openDb().then(function () {
+            getCardList();
+    //        $scope.cardList = [
+    //{ Name: "Nectar", Description: "Alexander's Nectar Card", Barcode: "1235495455" },
+    //{ Name: "Tesco Clubcard", Description: "Joint Clubcard", Barcode: "8798545121465181591891" },
+    //{ Name: "Oxford Brookes Climbing Wall", Description: "", Barcode: "7984561284956" }
+     //       ];
+        });
+    }
+
+    init();
 });
