@@ -9,5 +9,8 @@
     "jquery-validation": "1.11.1",
     "jquery-validation-unobtrusive": "3.2.2",
     "angular": "1.4.9"
+  },
+  "resolutions": {
+    "angular": "1.4.9"
   }
 }
