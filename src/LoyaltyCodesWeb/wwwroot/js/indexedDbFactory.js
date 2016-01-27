@@ -87,7 +87,7 @@
                             var value = evt.target.result;
 
                             var card = {
-                                Id: value.Id,
+                                Id: value.id,
                                 Name: value.Name,
                                 Description: value.Description,
                                 Barcode: value.Barcode
