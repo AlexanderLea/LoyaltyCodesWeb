@@ -40,6 +40,7 @@
                     store.createIndex("Barcode", "Barcode", { unique: false });
                 };
             });
+
             return promise;
         }
 
@@ -137,6 +138,7 @@
             openDb: openDb,
             getCard: getCard,
             getAllCards: getAllCards,
+            addCard: addCard
         };
     }
 })();

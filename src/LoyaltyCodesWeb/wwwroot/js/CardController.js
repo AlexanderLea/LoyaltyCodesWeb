@@ -19,11 +19,25 @@
             console.log('error.', error);
         });
 
+        $scope.addCard = function () {
+            var card = {
+                Name: $scope.Name,
+                Description: $scope.Description,
+                Barcode: $scope.Barcode
+            }
+
+            indexedDbFactory.addCard(card).then(function() {
+                refreshCards();
+            }, function(err) {
+                //do something on error
+            });
+        };
+
         function refreshCards() {
-            if (!dbOpen) {
-                indexedDbFactory.getAllCards().then(function(data) {
+            if (dbOpen) {
+                indexedDbFactory.getAllCards().then(function (data) {
                     $scope.cardList = data;
-                }, function(error) {
+                }, function (error) {
                     // log errors
                     console.log('error.', error);
                 });

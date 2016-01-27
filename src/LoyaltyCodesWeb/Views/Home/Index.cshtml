@@ -3,13 +3,26 @@
 }
 
 <div ng-app="LoyaltyCardApp">
-    <div ng-controller="cardController" class="row" ng-init="refreshCards()">
-        <ul >
-            <li ng-repeat="card in cardList">
-                <span>{{card.Name}}</span>
-            </li>
-        </ul>
+    <div class="row" ng-controller="cardController">
+        <div class="col-md-6" ng-bind="refreshCards()">
+            <ul>
+                <li ng-repeat="card in cardList">
+                    <span>{{card.Name}}</span>
+                </li>
+            </ul>
 
-        <button ng-click="refreshCards()">Refresh</button>
+            <button ng-click="refreshCards()">Refresh</button>
+        </div>
+        <div class="col-md-6">
+            <form ng-submit="addCard()" role="form">
+                <div class="form-group">
+                    <input type="text" ng-model="Name" name="Name" placeholder="Name" />
+                    <input type="text" ng-model="Description" name="Description" placeholder="Description" />
+                    <input type="text" ng-model="Barcode" name="Barcode" placeholder="Barcode Number" />
+                    <input type="submit" id="submit" value="Submit" />
+                </div>
+            </form>
+        </div>
     </div>
+
 </div>
