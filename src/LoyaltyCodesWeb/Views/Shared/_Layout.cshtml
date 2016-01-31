@@ -13,12 +13,13 @@
         <environment names="Staging,Production">
             <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.0.0/css/bootstrap.min.css"
                   asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
-                  asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
+                  asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden"/>
             <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/css/bootstrap-touch-carousel.css"
                   asp-fallback-href="~/lib/bootstrap-touch-carousel/css/bootstrap-touch-carousel.css"
-                  asp-fallback-test-class="carousel-caption" asp-fallback-test-property="display" asp-fallback-test-value="none" />
-            <link rel="stylesheet" href="~/css/site.css" asp-file-version="true" />
+                  asp-fallback-test-class="carousel-caption" asp-fallback-test-property="display" asp-fallback-test-value="none"/>
+            <link rel="stylesheet" href="~/css/site.css" asp-file-version="true"/>
         </environment>
+        <base href="/">
     </head>
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -53,9 +54,11 @@
             <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
             <script src="~/lib/hammer.js/hammer.js"></script>
             <script src="~/lib/angular/angular.js"></script>
+            <script src="~/lib/angular-route/angular-route.js"></script>
             <script src="~/js/cardapp.js"></script>
             <script src="~/js/indexedDbFactory.js"></script>
             <script src="~/js/cardcontroller.js"></script>
+            <script src="~/lib/jsbarcode/JsBarcode.js"></script>
         </environment>
         <environment names="Staging,Production">
             <script src="//ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
@@ -73,11 +76,12 @@
             <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"
                     asp-fallback-src="~/lib/angular/angular.js"
                     asp-fallback-test="window.Angular">
-            </script>
-            <script src="~/lib/angular-indexed-db/angular-indexed-db.min.js"></script>
+            </script>                   
+            <script src="~/lib/angular-route/angular-route.min.js"></script>
             <script src="~/js/cardapp.min.js"></script>
             <script src="~/js/indexedDbFactory.min.js"></script>
             <script src="~/js/cardcontroller.min.js"></script>
+            <script src="~/lib/jsbarcode/JsBarcode.js"></script>
         </environment>
 
         @RenderSection("scripts", required: false)

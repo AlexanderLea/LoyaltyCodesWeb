@@ -8,7 +8,9 @@
     "jquery": "2.1.4",
     "jquery-validation": "1.11.1",
     "jquery-validation-unobtrusive": "3.2.2",
-    "angular": "1.4.9"
+    "angular": "1.4.9",
+    "jsbarcode": "1.6.1",
+    "angular-route": "1.4.9"
   },
   "resolutions": {
     "angular": "1.4.9"

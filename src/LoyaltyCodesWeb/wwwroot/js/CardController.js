@@ -19,19 +19,19 @@
             console.log('error.', error);
         });
 
-        $scope.addCard = function () {
-            var card = {
-                Name: $scope.Name,
-                Description: $scope.Description,
-                Barcode: $scope.Barcode
-            }
+        //$scope.addCard = function () {
+        //    var card = {
+        //        Name: $scope.Name,
+        //        Description: $scope.Description,
+        //        Barcode: $scope.Barcode
+        //    }
 
-            indexedDbFactory.addCard(card).then(function() {
-                refreshCards();
-            }, function(err) {
-                //do something on error
-            });
-        };
+        //    indexedDbFactory.addCard(card).then(function() {
+        //        refreshCards();
+        //    }, function(err) {
+        //        //do something on error
+        //    });
+        //};
 
         function refreshCards() {
             if (dbOpen) {
@@ -42,6 +42,10 @@
                     console.log('error.', error);
                 });
             }
+        }
+
+        function showCard(card) {
+            $scope.cardDetails = card;
         }
     }
 })();
