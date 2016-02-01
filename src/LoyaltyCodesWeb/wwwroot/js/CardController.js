@@ -1,15 +1,12 @@
 ﻿(function () {
     'use strict';
 
-    var controllerId = 'cardController';
+    var app = angular.module('LoyaltyCardApp');
 
-    angular.module('LoyaltyCardApp').controller(controllerId,
-        ['$scope', 'indexedDbFactory', cardController]);
-
-    function cardController($scope, indexedDbFactory) {
+    app.controller('cardController', ['$scope', 'indexedDbFactory', function ($scope, indexedDbFactory) {
         var dbOpen = false;
 
-        $scope.cardList = [];
+        $scope.cardList = [];        
 
         indexedDbFactory.openDb().then(function () {
             dbOpen = true;
@@ -18,20 +15,6 @@
             // log errors
             console.log('error.', error);
         });
-
-        //$scope.addCard = function () {
-        //    var card = {
-        //        Name: $scope.Name,
-        //        Description: $scope.Description,
-        //        Barcode: $scope.Barcode
-        //    }
-
-        //    indexedDbFactory.addCard(card).then(function() {
-        //        refreshCards();
-        //    }, function(err) {
-        //        //do something on error
-        //    });
-        //};
 
         function refreshCards() {
             if (dbOpen) {
@@ -44,10 +27,38 @@
             }
         }
 
-        function showCard(card) {
-            $scope.cardDetails = card;
+        function showCard() {
+            //$scope.cardDetails = "";
+            alert("Hello!");
         }
-    }
+    }]);
+
+    app.controller('createCardController', [
+        '$scope', '$window', 'indexedDbFactory', function ($scope, $window, indexedDbFactory) {
+            var dbOpen = false;
+
+            indexedDbFactory.openDb().then(function () {
+                dbOpen = true;
+            }, function (error) {
+                // log errors
+                console.log('error.', error);
+            });
+
+            $scope.addCard = function () {
+                var card = {
+                    Name: $scope.Name,
+                    Description: $scope.Description,
+                    Barcode: $scope.Barcode
+                }
+
+                indexedDbFactory.addCard(card).then(function () {
+                    $window.location.href = '/';
+                }, function (err) {
+                    //do something on error
+                });
+            };
+        }
+    ]);
 })();
 
 //$scope.cardList = [

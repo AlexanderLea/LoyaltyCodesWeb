@@ -1,14 +1,15 @@
-﻿<div class="row">
+﻿<div class="row"  ng-controller="cardController">
     <div class="col-md-6">
         <h1>Cards</h1>
         <ul>
             <li ng-repeat="card in cardList">
-                <a ng-click="showCard(card)">{{card.Name}}</a>
+                <a ng-click="showCard()">{{card.Name}}</a>
             </li>
         </ul>
 
+        <button ng-click="showCard()">Show</button>
         <button ng-click="refreshCards()">Refresh</button>
-        <a href="create"></a>
+        <a href="create">Create new Card</a>
     </div>
     <div class="col-md-6">
         <span>{{cardDetails.Name}}</span>

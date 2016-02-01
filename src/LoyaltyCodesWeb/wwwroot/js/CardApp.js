@@ -10,13 +10,13 @@
             .when('/', {
                 templateUrl: 'pages/cards.html',
                 controller: 'cardController'
-            });
+            })
 
-        //// route for the about page
-        //.when('/:id', {
-        //    templateUrl: '~/Views/Components/viewCard.html',
-        //    controller: 'aboutController'
-        //})
+            //// route for the about page
+            .when('/create', {
+                templateUrl: 'pages/createCard.html',
+                controller: 'createCardController'
+            });
 
         //// route for the contact page
         //.when('/contact', {
