@@ -27,10 +27,12 @@
             }
         }
 
-        function showCard() {
-            //$scope.cardDetails = "";
-            alert("Hello!");
+        function showCard(card) {
+            $scope.cardDetails = card;            
         }
+
+        $scope.showCard = showCard;
+        $scope.refreshCards = refreshCards;
     }]);
 
     app.controller('createCardController', [
@@ -59,6 +61,34 @@
             };
         }
     ]);
+
+    //app.controller('viewCardController', [
+    //    '$scope', '$window', 'indexedDbFactory', function ($scope, $window, indexedDbFactory) {
+    //        var dbOpen = false;
+
+    //        indexedDbFactory.openDb().then(function () {
+    //            dbOpen = true;
+    //        }, function (error) {
+    //            // log errors
+    //            console.log('error.', error);
+    //        });
+
+    //        $scope.addCard = function () {
+    //            var card = {
+    //                Name: $scope.Name,
+    //                Description: $scope.Description,
+    //                Barcode: $scope.Barcode
+    //            }
+
+    //            indexedDbFactory.addCard(card).then(function () {
+    //                $window.location.href = '/';
+    //            }, function (err) {
+    //                //do something on error
+    //            });
+    //        };
+    //    }
+    //]);
+
 })();
 
 //$scope.cardList = [
