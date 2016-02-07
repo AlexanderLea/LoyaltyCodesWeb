@@ -1,11 +1,22 @@
 ﻿<div class="row" ng-controller="cardController">
-    <div class="col-md-6" ng-init="refreshCards()">
+    <div class="col-md-12" ng-init="refreshCards()">
+
         <h1>Cards</h1>
-        <ul>
+        <div class="row">
+            <div class="col-md-3" ng-repeat="card in cardList">
+                <div class="card" ng-click="showCard(card)">
+                    <h2>{{card.Name}}</h2>
+                    <p>{{card.Description}}</p>
+                </div>
+            </div>
+        </div>
+        <!--<ul>
             <li ng-repeat="card in cardList">
-                <a ng-click="showCard(card)">{{card.Id}} - {{card.Name}}</a> <!--href="view?Id={{card.Id}}"-->
+
+                <div></div>
+                <a >{{card.Id}} - </a>
             </li>
-        </ul>
+        </ul>-->
 
         <a href="/create">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
