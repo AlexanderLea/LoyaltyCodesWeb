@@ -2,25 +2,17 @@
     <div class="col-md-12" ng-init="refreshCards()">
 
         <h1>Cards</h1>
+        <a href="/create">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            Create new Card
+        </a>
         <div class="row">
-            <div class="col-md-3" ng-repeat="card in cardList">
+            <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="card in cardList">
                 <div class="card" ng-click="showCard(card)">
                     <h2>{{card.Name}}</h2>
                     <p>{{card.Description}}</p>
                 </div>
             </div>
         </div>
-        <!--<ul>
-            <li ng-repeat="card in cardList">
-
-                <div></div>
-                <a >{{card.Id}} - </a>
-            </li>
-        </ul>-->
-
-        <a href="/create">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            Create new Card
-        </a>
     </div>
 </div>

@@ -4,8 +4,13 @@
 }
 
 .card {
+    text-align: center;
     min-height: 100px;
     border-radius: 10px;
-    background-color: #FFFF8A;
+    background-color: #CCF6FF;
     cursor: pointer;
+}
+
+.form-group input{
+    display: block;
 }
