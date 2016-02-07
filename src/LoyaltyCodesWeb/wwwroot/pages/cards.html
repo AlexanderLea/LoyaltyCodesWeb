@@ -1,5 +1,5 @@
 ﻿<div class="row"  ng-controller="cardController">
-    <div class="col-md-6">
+    <div class="col-md-6" ng-init="refreshCards()">
         <h1>Cards</h1>
         <ul>
             <li ng-repeat="card in cardList">
@@ -7,7 +7,6 @@
             </li>
         </ul>
 
-        <button ng-click="refreshCards()">Refresh</button>
         <a href="create">Create new Card</a>
     </div>
     <!--<div class="col-md-6">

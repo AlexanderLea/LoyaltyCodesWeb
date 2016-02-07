@@ -118,11 +118,18 @@
             var store = getObjectStore(DB_STORE_NAME, 'readonly');
 
             var promise = new Promise(function (resolve, reject) {
-                var req = store.get(id);
+                var key = parseInt(id);
+                var req = store.get(key);
 
                 req.onsuccess = function (event) {
                     // Do something with the request.result!
-                    resolve(req.result);
+                    var value = event.target.result;
+
+                    if (value)
+                        resolve(value);
+                    else {
+                        console.log('no values returned for id:', id);
+                    }
                 };
 
                 req.onerror = function (event) {

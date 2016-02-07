@@ -3,42 +3,46 @@
 
     var app = angular.module('LoyaltyCardApp');
 
-    app.controller('cardController', ['$scope', '$window', '$location','indexedDbFactory',
+    app.controller('cardController', ['$scope', '$window', '$location', 'indexedDbFactory',
         function ($scope, $window, $location, indexedDbFactory) {
-        var dbOpen = false;
+            var dbOpen = false;
 
-        $scope.cardList = [];        
+            $scope.cardList = [];
 
-        indexedDbFactory.openDb().then(function () {
-            dbOpen = true;
-            refreshCards();
-        }, function (error) {
-            // log errors
-            console.log('error.', error);
-        });
-
-        function refreshCards() {
-            if (dbOpen) {
-                indexedDbFactory.getAllCards().then(function (data) {
-                    $scope.cardList = data;
+            function loadData() {
+                indexedDbFactory.openDb().then(function () {
+                    dbOpen = true;
+                    refreshCards();
                 }, function (error) {
                     // log errors
                     console.log('error.', error);
                 });
             }
-        }
 
-        function showCard(card) {
-            
-            $location.path('/view/'+card.Id);
+            function refreshCards() {
+                if (dbOpen) {
+                    indexedDbFactory.getAllCards().then(function (data) {
+                        $scope.cardList = data;
+                        $scope.$apply();
+                    }, function (error) {
+                        // log errors
+                        console.log('error.', error);
+                    });
+                }
+                else
+                {
+                    loadData();
+                }
+            }
 
-            //currentCardService.set(card);
-            //$window.location.href = "view";
-        }
+            function showCard(card) {
+                $location.path('/view/' + card.Id);
+            }
 
-        $scope.showCard = showCard;
-        $scope.refreshCards = refreshCards;
-    }]);
+            $scope.showCard = showCard;
+            $scope.refreshCards = refreshCards;
+            $scope.loadData = loadData;
+        }]);
 
     app.controller('createCardController', [
         '$scope', '$window', 'indexedDbFactory', function ($scope, $window, indexedDbFactory) {
@@ -73,54 +77,41 @@
             var id = $routeParams.id;
 
 
-            $scope.message = id;
-
-            //var id = $routeParams.Id;
-
             //$scope.message = id;
+            $scope.card = null;
 
-            //var dbOpen = false;
-
-            //indexedDbFactory.openDb().then(function () {
-            //    dbOpen = true;
-            //}, function (error) {
-            //    // log errors
-            //    console.log('error.', error);
-            //});
-
-            //$scope.addCard = function () {
-            //    var card = {
-            //        Name: $scope.Name,
-            //        Description: $scope.Description,
-            //        Barcode: $scope.Barcode
-            //    }
-
-            //    indexedDbFactory.addCard(card).then(function () {
-            //        $window.location.href = '/';
-            //    }, function (err) {
-            //        //do something on error
-            //    });
-            //};
+            indexedDbFactory.openDb().then(function () {
+                indexedDbFactory.getCard(id).then(function (card) {
+                    $scope.card = card;
+                    $scope.$apply();
+                }, function (error) {
+                    // log errors
+                    console.log('error.', error);
+                });
+            }, function (error) {
+                // log errors
+                console.log('error.', error);
+            });
         }
     ]);
-    
 
-    app.directive('jsbarcode', function() {
-        return {
-            // Restrict it to be an attribute in this case
-            restrict: 'EA',
-            scope: {
-                barcodeData: '='
-            },
-             //responsible for registering DOM listeners as well as updating the DOM
-            link: function ($scope, element, attrs) {
-                if(typeof ($scope.barcodeData) != 'undefined')
-                    element.JsBarcode($scope.barcodeData);
-            }
-            //template: '{{cardDetails.Barcode}}'
-            
-        };
-    });
+
+    //app.directive('jsbarcode', function() {
+    //    return {
+    //        // Restrict it to be an attribute in this case
+    //        restrict: 'EA',
+    //        scope: {
+    //            barcodeData: '='
+    //        },
+    //         //responsible for registering DOM listeners as well as updating the DOM
+    //        link: function ($scope, element, attrs) {
+    //            if(typeof ($scope.barcodeData) != 'undefined')
+    //                element.JsBarcode($scope.barcodeData);
+    //        }
+    //        //template: '{{cardDetails.Barcode}}'
+
+    //    };
+    //});
 })();
 
 //$scope.cardList = [
