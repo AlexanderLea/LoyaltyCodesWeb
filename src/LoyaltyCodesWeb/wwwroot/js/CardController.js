@@ -102,24 +102,6 @@
             loadCard();
         }
     ]);
-
-
-    app.directive('jsbarcode', function() {
-        return {
-            // Restrict it to be an attribute in this case
-            restrict: 'EA',
-            scope: {
-                barcodeData: '='
-            },
-             //responsible for registering DOM listeners as well as updating the DOM
-            link: function ($scope, element, attrs) {
-                if(typeof ($scope.barcodeData) != 'undefined')
-                    element.JsBarcode($scope.barcodeData);
-            }
-            //template: '{{cardDetails.Barcode}}'
-
-        };
-    });
 })();
 
 //$scope.cardList = [
