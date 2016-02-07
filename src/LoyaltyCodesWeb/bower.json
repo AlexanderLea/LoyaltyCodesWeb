@@ -9,9 +9,9 @@
     "jquery-validation": "1.11.1",
     "jquery-validation-unobtrusive": "3.2.2",
     "angular": "1.4.9",
-    "jsbarcode": "1.6.1",
     "angular-route": "1.4.9",
-    "angular-ui-router": "0.2.17"
+    "angular-ui-router": "0.2.17",
+    "angular-io-barcode": "1.0.4"
   },
   "resolutions": {
     "angular": "1.4.9"

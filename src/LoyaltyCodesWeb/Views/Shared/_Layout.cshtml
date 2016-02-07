@@ -30,13 +30,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">LoyaltyCodesWeb</a>
+                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">Loyalty Cards</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li><a asp-controller="Home" asp-action="About">About</a></li>
-                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -45,7 +42,7 @@
             @RenderBody()
             <hr />
             <footer>
-                <p>&copy; 2016 - LoyaltyCodesWeb</p>
+                <p>&copy; 2016 - <a href="http://alexanderlea.com">Alexander Lea</a></p>
             </footer>
         </div>
 
@@ -58,10 +55,8 @@
             <script src="~/lib/angular-ui-router/release/angular-ui-router.js"></script>
             <script src="~/js/cardapp.js"></script>
             <script src="~/js/indexedDbFactory.js"></script>
-            <script src="~/js/currentCardService.js"></script>
             <script src="~/js/cardcontroller.js"></script>
-            <script src="~/lib/jsbarcode/JsBarcode.js"></script>
-            <script src="~/lib/jsbarcode/CODE128.js"></script>
+            <script src="~/lib/angular-io-barcode/build/angular-io-barcode.js"></script>
         </environment>
         <environment names="Staging,Production">
             <script src="//ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
@@ -81,12 +76,12 @@
                     asp-fallback-test="window.Angular">
             </script>                   
             <script src="~/lib/angular-route/angular-route.min.js"></script>
+            <script src="~/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
             <script src="~/js/cardapp.min.js"></script>
             <script src="~/js/indexedDbFactory.min.js"></script>
             <script src="~/js/cardcontroller.min.js"></script>
             <script src="~/js/currentCardService.min.js"></script>
-            <script src="~/lib/jsbarcode/JsBarcode.js"></script>
-            <script src="~/lib/jsbarcode/CODE128.js"></script>
+            <script src="~/lib/angular-io-barcode/build/angular-io-barcode.min.js"></script>
         </environment>
 
         @RenderSection("scripts", required: false)

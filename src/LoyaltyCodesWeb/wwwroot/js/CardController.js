@@ -47,7 +47,7 @@
     app.controller('createCardController', [
         '$scope', '$window', 'indexedDbFactory', function ($scope, $window, indexedDbFactory) {
             var dbOpen = false;
-
+            
             indexedDbFactory.openDb().then(function () {
                 dbOpen = true;
             }, function (error) {
@@ -55,7 +55,7 @@
                 console.log('error.', error);
             });
 
-            $scope.addCard = function () {
+            $scope.addCard = function () {               
                 var card = {
                     Name: $scope.Name,
                     Description: $scope.Description,
@@ -73,45 +73,53 @@
 
     app.controller('viewCardController', ['$scope', '$window', '$routeParams', 'indexedDbFactory',
         function ($scope, $window, $routeParams, indexedDbFactory) {
-
-            var id = $routeParams.id;
-
+            var isDbOpen = false;
 
             //$scope.message = id;
             $scope.card = null;
+            
+            function loadCard() {
+                var id = $routeParams.id;
+                if (isDbOpen) {
+                    indexedDbFactory.getCard(id).then(function (card) {
+                        $scope.card = card;
+                        $scope.$apply();
+                    }, function (error) {
+                        // log errors
+                        console.log('error.', error);
+                    });                    
+                } else {
+                    indexedDbFactory.openDb().then(function() {
+                        isDbOpen = true;
+                        loadCard();
+                    }, function (error) {
+                        // log errors
+                        console.log('error.', error);
+                    });
+                }            
+            }
 
-            indexedDbFactory.openDb().then(function () {
-                indexedDbFactory.getCard(id).then(function (card) {
-                    $scope.card = card;
-                    $scope.$apply();
-                }, function (error) {
-                    // log errors
-                    console.log('error.', error);
-                });
-            }, function (error) {
-                // log errors
-                console.log('error.', error);
-            });
+            loadCard();
         }
     ]);
 
 
-    //app.directive('jsbarcode', function() {
-    //    return {
-    //        // Restrict it to be an attribute in this case
-    //        restrict: 'EA',
-    //        scope: {
-    //            barcodeData: '='
-    //        },
-    //         //responsible for registering DOM listeners as well as updating the DOM
-    //        link: function ($scope, element, attrs) {
-    //            if(typeof ($scope.barcodeData) != 'undefined')
-    //                element.JsBarcode($scope.barcodeData);
-    //        }
-    //        //template: '{{cardDetails.Barcode}}'
+    app.directive('jsbarcode', function() {
+        return {
+            // Restrict it to be an attribute in this case
+            restrict: 'EA',
+            scope: {
+                barcodeData: '='
+            },
+             //responsible for registering DOM listeners as well as updating the DOM
+            link: function ($scope, element, attrs) {
+                if(typeof ($scope.barcodeData) != 'undefined')
+                    element.JsBarcode($scope.barcodeData);
+            }
+            //template: '{{cardDetails.Barcode}}'
 
-    //    };
-    //});
+        };
+    });
 })();
 
 //$scope.cardList = [

@@ -1,4 +1,4 @@
-﻿<div class="row"  ng-controller="cardController">
+﻿<div class="row" ng-controller="cardController">
     <div class="col-md-6" ng-init="refreshCards()">
         <h1>Cards</h1>
         <ul>
@@ -7,11 +7,9 @@
             </li>
         </ul>
 
-        <a href="create">Create new Card</a>
+        <a href="/create">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            Create new Card
+        </a>
     </div>
-    <!--<div class="col-md-6">
-        <h1>{{cardDetails.Name}}</h1>
-        <h2>{{cardDetails.Description}}</h2>
-        <span>{{cardDetails.Barcode}}</span>
-    </div>-->
 </div>

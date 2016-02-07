@@ -1,6 +1,9 @@
 ﻿(function () {
     'use strict';
-    var app = angular.module('LoyaltyCardApp', ['ngRoute', 'ui.router']);
+    var app = angular.module('LoyaltyCardApp', [
+        'ngRoute',
+        'ui.router',
+        'io-barcode']);
 
     // configure our routes
     app.config(function ($routeProvider, $locationProvider, $stateProvider) {

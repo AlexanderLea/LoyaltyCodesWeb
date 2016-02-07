@@ -1,9 +1,13 @@
 ﻿
 <div class="row" ng-controller="viewCardController">
     <div class="col-md-12">
+        <a href="/">
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+            Return to list
+        </a>
+
         <h1>{{card.Name}}</h1>
         <h2>{{card.Description}}</h2>
-        <span>{{card.Barcode}}</span>
-        <!--<img js-barcode barcode-data="1234567"></img>-->
+        <io-barcode code="{{card.Barcode}}" type="CODE128B"/>
     </div>
 </div>
