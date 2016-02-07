@@ -2,7 +2,9 @@
     'use strict';
 
 
-    angular.module('LoyaltyCardApp').factory('indexedDbFactory', [indexedDbFactory]);
+    var app = angular.module('LoyaltyCardApp');
+    
+    app.factory('indexedDbFactory', [indexedDbFactory]);
 
 
     function indexedDbFactory() {

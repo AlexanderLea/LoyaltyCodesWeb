@@ -3,7 +3,8 @@
 
     var app = angular.module('LoyaltyCardApp');
 
-    app.controller('cardController', ['$scope', 'indexedDbFactory', function ($scope, indexedDbFactory) {
+    app.controller('cardController', ['$scope', '$window', 'indexedDbFactory',
+        function ($scope, $window, indexedDbFactory) {
         var dbOpen = false;
 
         $scope.cardList = [];        
@@ -28,7 +29,11 @@
         }
 
         function showCard(card) {
-            $scope.cardDetails = card;            
+            
+            $window.location.href = 'view/' + card.Id;
+
+            //currentCardService.set(card);
+            //$window.location.href = "view";
         }
 
         $scope.showCard = showCard;
@@ -62,32 +67,41 @@
         }
     ]);
 
-    //app.controller('viewCardController', [
-    //    '$scope', '$window', 'indexedDbFactory', function ($scope, $window, indexedDbFactory) {
-    //        var dbOpen = false;
+    app.controller('viewCardController', ['$scope', '$window', 'indexedDbFactory',
+        function ($scope, $window, indexedDbFactory) {
 
-    //        indexedDbFactory.openDb().then(function () {
-    //            dbOpen = true;
-    //        }, function (error) {
-    //            // log errors
-    //            console.log('error.', error);
-    //        });
+            //$scope.message = $stateParams.id;
 
-    //        $scope.addCard = function () {
-    //            var card = {
-    //                Name: $scope.Name,
-    //                Description: $scope.Description,
-    //                Barcode: $scope.Barcode
-    //            }
+            //$scope.message = "Hello World!";
 
-    //            indexedDbFactory.addCard(card).then(function () {
-    //                $window.location.href = '/';
-    //            }, function (err) {
-    //                //do something on error
-    //            });
-    //        };
-    //    }
-    //]);
+            //var id = $routeParams.Id;
+
+            //$scope.message = id;
+
+            //var dbOpen = false;
+
+            //indexedDbFactory.openDb().then(function () {
+            //    dbOpen = true;
+            //}, function (error) {
+            //    // log errors
+            //    console.log('error.', error);
+            //});
+
+            //$scope.addCard = function () {
+            //    var card = {
+            //        Name: $scope.Name,
+            //        Description: $scope.Description,
+            //        Barcode: $scope.Barcode
+            //    }
+
+            //    indexedDbFactory.addCard(card).then(function () {
+            //        $window.location.href = '/';
+            //    }, function (err) {
+            //        //do something on error
+            //    });
+            //};
+        }
+    ]);
     
 
     app.directive('jsbarcode', function() {

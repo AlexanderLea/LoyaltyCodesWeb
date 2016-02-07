@@ -3,17 +3,16 @@
         <h1>Cards</h1>
         <ul>
             <li ng-repeat="card in cardList">
-                <a ng-click="showCard(card)">{{card.Name}}</a>
+                <a href="view?Id={{card.Id}}">{{card.Id}} - {{card.Name}}</a> <!--"ng-click="showCard(card)"-->
             </li>
         </ul>
 
         <button ng-click="refreshCards()">Refresh</button>
         <a href="create">Create new Card</a>
     </div>
-    <div class="col-md-6">
+    <!--<div class="col-md-6">
         <h1>{{cardDetails.Name}}</h1>
         <h2>{{cardDetails.Description}}</h2>
         <span>{{cardDetails.Barcode}}</span>
-        <jsbarcode barcode-data="cardDetails.Barcode"></jsbarcode>
-    </div>
+    </div>-->
 </div>
