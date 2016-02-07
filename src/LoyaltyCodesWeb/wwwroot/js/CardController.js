@@ -3,8 +3,8 @@
 
     var app = angular.module('LoyaltyCardApp');
 
-    app.controller('cardController', ['$scope', '$window', 'indexedDbFactory',
-        function ($scope, $window, indexedDbFactory) {
+    app.controller('cardController', ['$scope', '$window', '$location','indexedDbFactory',
+        function ($scope, $window, $location, indexedDbFactory) {
         var dbOpen = false;
 
         $scope.cardList = [];        
@@ -30,7 +30,7 @@
 
         function showCard(card) {
             
-            $window.location.href = 'view/' + card.Id;
+            $location.path('/view/'+card.Id);
 
             //currentCardService.set(card);
             //$window.location.href = "view";
@@ -67,12 +67,13 @@
         }
     ]);
 
-    app.controller('viewCardController', ['$scope', '$window', 'indexedDbFactory',
-        function ($scope, $window, indexedDbFactory) {
+    app.controller('viewCardController', ['$scope', '$window', '$routeParams', 'indexedDbFactory',
+        function ($scope, $window, $routeParams, indexedDbFactory) {
 
-            //$scope.message = $stateParams.id;
+            var id = $routeParams.id;
 
-            //$scope.message = "Hello World!";
+
+            $scope.message = id;
 
             //var id = $routeParams.Id;
 

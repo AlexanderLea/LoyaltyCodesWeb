@@ -3,7 +3,7 @@
         <h1>Cards</h1>
         <ul>
             <li ng-repeat="card in cardList">
-                <a href="view?Id={{card.Id}}">{{card.Id}} - {{card.Name}}</a> <!--"ng-click="showCard(card)"-->
+                <a ng-click="showCard(card)">{{card.Id}} - {{card.Name}}</a> <!--href="view?Id={{card.Id}}"-->
             </li>
         </ul>
 
