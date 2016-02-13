@@ -91,7 +91,9 @@
                         $scope.$apply();
                     }, function (error) {
                         // log errors
+                        $scope.error = 'There was an error loading the selected card';
                         console.log('error.', error);
+                        $scope.$apply();
                     });                    
                 } else {
                     indexedDbFactory.openDb().then(function() {
