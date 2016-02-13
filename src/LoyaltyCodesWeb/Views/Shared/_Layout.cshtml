@@ -5,13 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />      
         <title ng-bind="title"></title>
         <environment names="Development">
-            @* Dev *@
             <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
             <link rel="stylesheet" href="~/lib/bootstrap-touch-carousel/dist/css/bootstrap-touch-carousel.css" />
             <link rel="stylesheet" href="~/css/site.css" />
         </environment>
         <environment names="Staging,Production">
-            @* Prod/stage *@
             <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.0.0/css/bootstrap.min.css"
                   asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
                   asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden"/>
@@ -48,6 +46,7 @@
         </div>
 
         <environment names="Development">
+            @* Dev *@
             <script src="~/lib/jquery/dist/jquery.js"></script>
             <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
             <script src="~/lib/hammer.js/hammer.js"></script>
@@ -60,6 +59,7 @@
             <script src="~/lib/angular-io-barcode/build/angular-io-barcode.js"></script>
         </environment>
         <environment names="Staging,Production">
+            @* Prod/stage *@
             <script src="//ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
                     asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
                     asp-fallback-test="window.jQuery">
@@ -72,10 +72,10 @@
                     asp-fallback-src="~/lib/hammer.js/hammer.js"
                     asp-fallback-test="window.Hammer">
             </script>
-            <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"
+            @*<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"
                     asp-fallback-src="~/lib/angular/angular.js"
                     asp-fallback-test="window.Angular">
-            </script>                   
+            </script>*@                   
             <script src="~/lib/angular-route/angular-route.min.js"></script>
             <script src="~/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
             <script src="~/lib/angular-io-barcode/build/angular-io-barcode.min.js"></script>
