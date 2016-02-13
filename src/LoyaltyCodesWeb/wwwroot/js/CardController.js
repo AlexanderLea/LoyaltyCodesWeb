@@ -3,8 +3,10 @@
 
     var app = angular.module('LoyaltyCardApp');
 
-    app.controller('cardController', ['$scope', '$window', '$location', 'indexedDbFactory',
-        function ($scope, $window, $location, indexedDbFactory) {
+    app.controller('cardController', ['$rootScope', '$scope', '$window', '$location', 'indexedDbFactory',
+        function ($rootScope, $scope, $window, $location, indexedDbFactory) {
+            $rootScope.title = 'Loyalty Cards - View Cards';
+
             var dbOpen = false;
 
             $scope.cardList = [];
@@ -45,7 +47,9 @@
         }]);
 
     app.controller('createCardController', [
-        '$scope', '$window', 'indexedDbFactory', function ($scope, $window, indexedDbFactory) {
+        '$rootScope', '$scope', '$window', 'indexedDbFactory',
+        function ($rootScope, $scope, $window, indexedDbFactory) {
+            $rootScope.title = 'Loyalty Cards - Create Card';
             var dbOpen = false;
             
             indexedDbFactory.openDb().then(function () {
@@ -71,8 +75,9 @@
         }
     ]);
 
-    app.controller('viewCardController', ['$scope', '$window', '$routeParams', 'indexedDbFactory',
-        function ($scope, $window, $routeParams, indexedDbFactory) {
+    app.controller('viewCardController', ['$rootScope', '$scope', '$window', '$routeParams', 'indexedDbFactory',
+        function ($rootScope, $scope, $window, $routeParams, indexedDbFactory) {
+            $rootScope.title = 'Loyalty Cards - Card Details';
             var isDbOpen = false;
 
             //$scope.message = id;

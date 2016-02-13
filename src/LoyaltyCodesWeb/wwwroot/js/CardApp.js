@@ -24,6 +24,9 @@
             .when('/view/:id', {
                 templateUrl: 'pages/viewCard.html',
                 controller: 'viewCardController'
+            })
+            .otherwise({
+                redirectTo: '/'
             });
     });
 })();

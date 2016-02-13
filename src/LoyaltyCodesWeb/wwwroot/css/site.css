@@ -3,9 +3,14 @@
     padding-bottom: 20px;
 }
 
+.body-content {
+    padding-top: 15px;
+}
+
 .card {
     text-align: center;
     min-height: 100px;
+    -ms-border-radius: 10px;
     border-radius: 10px;
     background-color: #CCF6FF;
     cursor: pointer;
