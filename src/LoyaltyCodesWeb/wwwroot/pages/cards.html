@@ -8,7 +8,7 @@
         </a>
         <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="card in cardList">
-                <div class="card" ng-click="showCard(card)" style="background-color:'{{card.Colour}}'">
+                <div class="card" ng-click="showCard(card)" style="background-color:#{{card.Colour}}">
                     <h2>{{card.Name}} </h2>
                     <p>{{card.Description}}</p>
                 </div>
