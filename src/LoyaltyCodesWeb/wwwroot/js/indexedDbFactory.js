@@ -51,7 +51,6 @@
         }
 
         function getCard(id) {
-            //var store = getObjectStore(DB_STORE_NAME, 'readonly');
 
             var promise = new Promise(function (resolve, reject) {
 
