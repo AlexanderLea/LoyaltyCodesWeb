@@ -7,38 +7,24 @@
         function ($rootScope, $scope, $window, $location, indexedDbFactory) {
             $rootScope.title = 'Loyalty Cards - View Cards';
 
-            var dbOpen = false;
-
             $scope.cardList = [];
 
             function loadData() {
-                indexedDbFactory.openDb().then(function () {
-                    dbOpen = true;
-                    refreshCards();
+                refreshCards();
+            }
+
+            function refreshCards() {
+                indexedDbFactory.getAllCards().then(function (data) {
+                    $scope.cardList = data;
+                    $scope.$apply();
                 }, function (error) {
                     // log errors
                     console.log('error.', error);
                 });
             }
 
-            function refreshCards() {
-                if (dbOpen) {
-                    indexedDbFactory.getAllCards().then(function (data) {
-                        $scope.cardList = data;
-                        $scope.$apply();
-                    }, function (error) {
-                        // log errors
-                        console.log('error.', error);
-                    });
-                }
-                else
-                {
-                    loadData();
-                }
-            }
-
             function showCard(card) {
-                $location.path('/view/' + card.Id);
+                $location.path('/view/' + card._id);
             }
 
             $scope.showCard = showCard;
@@ -50,20 +36,13 @@
         '$rootScope', '$scope', '$window', 'indexedDbFactory',
         function ($rootScope, $scope, $window, indexedDbFactory) {
             $rootScope.title = 'Loyalty Cards - Create Card';
-            var dbOpen = false;
-            
-            indexedDbFactory.openDb().then(function () {
-                dbOpen = true;
-            }, function (error) {
-                // log errors
-                console.log('error.', error);
-            });
 
-            $scope.addCard = function () {               
+            $scope.addCard = function () {
                 var card = {
                     Name: $scope.Name,
                     Description: $scope.Description,
-                    Barcode: $scope.Barcode
+                    Barcode: $scope.Barcode,
+                    Colour: $scope.Colour
                 }
 
                 indexedDbFactory.addCard(card).then(function () {
@@ -78,32 +57,23 @@
     app.controller('viewCardController', ['$rootScope', '$scope', '$window', '$routeParams', 'indexedDbFactory',
         function ($rootScope, $scope, $window, $routeParams, indexedDbFactory) {
             $rootScope.title = 'Loyalty Cards - Card Details';
-            var isDbOpen = false;
 
             //$scope.message = id;
             $scope.card = null;
-            
+
             function loadCard() {
                 var id = $routeParams.id;
-                if (isDbOpen) {
-                    indexedDbFactory.getCard(id).then(function (card) {
-                        $scope.card = card;
-                        $scope.$apply();
-                    }, function (error) {
-                        // log errors
-                        $scope.error = 'There was an error loading the selected card';
-                        console.log('error.', error);
-                        $scope.$apply();
-                    });                    
-                } else {
-                    indexedDbFactory.openDb().then(function() {
-                        isDbOpen = true;
-                        loadCard();
-                    }, function (error) {
-                        // log errors
-                        console.log('error.', error);
-                    });
-                }            
+
+                indexedDbFactory.getCard(id).then(function (card) {
+                    $scope.card = card;
+                    $scope.$apply();
+                }, function (error) {
+                    // log errors
+                    $scope.error = 'There was an error loading the selected card';
+                    console.log('error.', error);
+                    $scope.$apply();
+                });
+
             }
 
             loadCard();
