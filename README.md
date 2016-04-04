@@ -1,7 +1,7 @@
 # LoyaltyCodesWeb
-Basic playground for me to learn a load of new client side web stuff, and create something potentially useful in doing so.
+Initial project for me to learn Angular, and create something potentially useful in doing so.
 
 Angularjs
-IndexedDb
+PouchDb
 
-(in a .net project because grossness)
+As a .net 5 project, because it may evolve into having a .net API backend. (though probably not, because PouchDb's sync with CouchDb)
